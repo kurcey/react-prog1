@@ -5,10 +5,12 @@ class Book extends Component {
     super(props);
     this.state = {};
   }
+  changeBook = event => {
+    this.props.changeShelf(this.props.book, event.target.value);
+  };
 
   render() {
-    const { title, authors, imageLinks } = this.props.book;
-
+    const { title, authors, imageLinks, shelf } = this.props.book;
     return (
       <>
         <li>
@@ -23,7 +25,7 @@ class Book extends Component {
                 }}
               ></div>
               <div className="book-shelf-changer">
-                <select>
+                <select name="shelf" value={shelf} onChange={this.changeBook}>
                   <option value="move" disabled>
                     Move to...
                   </option>

@@ -4,7 +4,7 @@ import Book from "./Book.js";
 class ListBooks extends Component {
   constructor(props) {
     super(props);
-    this.state = { allBooks: [] };
+    this.state = {};
   }
 
   render() {
@@ -34,7 +34,13 @@ class ListBooks extends Component {
               <div className="bookshelf-books">
                 <ol className="books-grid">
                   {currentlyReading.map(bookResult => {
-                    return <Book key={bookResult.id} book={bookResult} />;
+                    return (
+                      <Book
+                        key={bookResult.id}
+                        book={bookResult}
+                        changeShelf={this.props.changeShelf}
+                      />
+                    );
                   })}
                 </ol>
               </div>
@@ -46,7 +52,13 @@ class ListBooks extends Component {
                 <ol className="books-grid">
                   {" "}
                   {wantToRead.map(bookResult => {
-                    return <Book key={bookResult.id} book={bookResult} />;
+                    return (
+                      <Book
+                        key={bookResult.id}
+                        book={bookResult}
+                        changeShelf={this.props.changeShelf}
+                      />
+                    );
                   })}
                 </ol>
               </div>
@@ -58,7 +70,13 @@ class ListBooks extends Component {
                 <ol className="books-grid">
                   {" "}
                   {read.map(bookResult => {
-                    return <Book key={bookResult.id} book={bookResult} />;
+                    return (
+                      <Book
+                        key={bookResult.id}
+                        book={bookResult}
+                        changeShelf={this.props.changeShelf}
+                      />
+                    );
                   })}
                 </ol>
               </div>

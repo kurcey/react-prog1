@@ -16,10 +16,18 @@ class BooksApp extends React.Component {
   };
 
   componentDidMount() {
+    this.refreshBookList();
+  }
+
+  refreshBookList() {
     BooksAPI.getAll().then(result => {
       this.setState({ allBooks: result });
     });
   }
+
+  changeShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => this.refreshBookList());
+  };
 
   render() {
     return (
@@ -50,7 +58,10 @@ class BooksApp extends React.Component {
             </div>
           </div>
         ) : (
-          <ListBooks allBooks={this.state.allBooks} />
+          <ListBooks
+            allBooks={this.state.allBooks}
+            changeShelf={this.changeShelf}
+          />
         )}
       </div>
     );

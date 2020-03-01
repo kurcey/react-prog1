@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import Book from "./Book.js";
+import { Link } from "react-router-dom";
 
 class SearchBooks extends Component {
   render() {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <button className="close-search" onClick={this.props.displayList}>
-            Close
-          </button>
+          <Link to="/">
+            <button className="close-search">Close</button>
+          </Link>
           <div className="search-books-input-wrapper">
             <input
               type="text"

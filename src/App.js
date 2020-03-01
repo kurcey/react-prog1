@@ -2,11 +2,11 @@ import React from "react";
 import * as BooksAPI from "./BooksAPI";
 import ListBooks from "./component/ListBooks";
 import SearchBooks from "./component/SearchBooks";
+import { Link, Route } from "react-router-dom";
 import "./App.css";
 
 class BooksApp extends React.Component {
   state = {
-    showSearchPage: false,
     allBooks: [],
     searchResults: []
   };
@@ -53,24 +53,32 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <div className="list-books">
-          {this.state.showSearchPage ? (
-            <SearchBooks
-              searchBooks={this.searchBooks}
-              searchResults={this.state.searchResults}
-              changeShelf={this.changeShelf}
-              displayList={this.displayList}
-            />
-          ) : (
-            <ListBooks
-              allBooks={this.state.allBooks}
-              changeShelf={this.changeShelf}
-            />
-          )}
+          <Route
+            path="/search"
+            render={() => (
+              <SearchBooks
+                searchBooks={this.searchBooks}
+                searchResults={this.state.searchResults}
+                changeShelf={this.changeShelf}
+              />
+            )}
+          />
+
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <ListBooks
+                allBooks={this.state.allBooks}
+                changeShelf={this.changeShelf}
+              />
+            )}
+          />
         </div>
         <div className="open-search">
-          <button onClick={() => this.setState({ showSearchPage: true })}>
-            Add a book
-          </button>
+          <Link to="/search">
+            <button>Add a book</button>
+          </Link>
         </div>
       </div>
     );

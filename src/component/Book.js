@@ -1,12 +1,23 @@
 import React, { Component } from "react";
 
 class Book extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
   changeBook = event => {
-    this.props.changeShelf(this.props.book, event.target.value);
+    const { changeShelf, book } = this.props;
+    changeShelf(book, event.target.value);
+  };
+
+  validateImage = imageLinks => {
+    if (
+      imageLinks !== undefined &&
+      imageLinks !== null &&
+      imageLinks.smallThumbnail !== undefined &&
+      imageLinks.smallThumbnail !== null
+    )
+      return {
+        width: 128,
+        height: 193,
+        backgroundImage: `url(${imageLinks.smallThumbnail})`
+      };
   };
 
   render() {
@@ -18,14 +29,14 @@ class Book extends Component {
             <div className="book-top">
               <div
                 className="book-cover"
-                style={{
-                  width: 128,
-                  height: 193,
-                  backgroundImage: `url(${imageLinks.smallThumbnail})`
-                }}
+                style={this.validateImage(imageLinks)}
               ></div>
               <div className="book-shelf-changer">
-                <select name="shelf" value={shelf} onChange={this.changeBook}>
+                <select
+                  name="shelf"
+                  value={shelf ? shelf : "none"}
+                  onChange={this.changeBook}
+                >
                   <option value="move" disabled>
                     Move to...
                   </option>

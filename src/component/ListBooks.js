@@ -2,11 +2,6 @@ import React, { Component } from "react";
 import Book from "./Book.js";
 
 class ListBooks extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
     const { allBooks } = this.props;
     const currentlyReading = allBooks.filter(results => {
@@ -21,9 +16,8 @@ class ListBooks extends Component {
       return results.shelf === "read";
     });
 
-    console.log(read);
     return (
-      <div className="list-books">
+      <>
         <div className="list-books-title">
           <h1>MyReads</h1>
         </div>
@@ -83,12 +77,7 @@ class ListBooks extends Component {
             </div>
           </div>
         </div>
-        <div className="open-search">
-          <button onClick={() => this.setState({ showSearchPage: true })}>
-            Add a book
-          </button>
-        </div>
-      </div>
+      </>
     );
   }
 }
